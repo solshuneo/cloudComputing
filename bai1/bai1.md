@@ -18,7 +18,7 @@
 - do route isp là 6.9.6.9/24
 - nên đặt ip tại router có thể 6.9.6.1 đến 6.9.6.254 trừ 6.9.6.9
 - mình sẽ chọn là 6.9.6.10 cho địa chỉ ip của route mà kết nối với 2 switch kết nối với 2 server trên
-- mình sẽ set là 6.9.6.10/24
+- mình sẽ set là 6.9.6.10/24 đầu ra
 ```bash
 route(config)# interface [gate]
 route(config-if)# ip address 6.9.6.10 255.255.255.0
@@ -38,3 +38,18 @@ route(config)# ping 8.8.8.10
 route(config)# ping 8.8.8.11
 ```
 - khi nào 5/5 100% thì thôi
+- Giờ chúng ta cần nat 2 server đến
+```bash
+route(config)# interface [gate]
+route(config-if)# ip nat inside
+```
+- nat out side ne
+```bash
+route(config)# interface 6.9.6.10
+route(config-if)# ip nat outside
+```
+- nat static
+```bash
+route(config)# ip nat inside source static gate 6.9.6.10
+```
+- free ping thoi ha
